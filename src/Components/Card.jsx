@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 
 const Card = ({ data }) => {
     const { id, name, username, email, website } = data;
+
+
+
+
     return (
         <div className=" w-64 shadow-md h-[18rem]  overflow-hidden rounded   p-3 hover:shadow-xl hover:cursor-pointer flex flex-col justify-between">
             <div className="flex-grow">
@@ -25,7 +29,7 @@ const Card = ({ data }) => {
                     Edit Student
                 </button>
                 <button className=" bg-red-700 hover:bg-red-800 rounded text-sm mt-3 px-3 py-2 text-white w-full">
-                    Delete Student
+                  <Link to={`/delete/${id}`}>Delete Student</Link>
                 </button>
             </div>
         </div>

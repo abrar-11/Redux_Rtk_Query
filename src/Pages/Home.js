@@ -1,28 +1,28 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Card from "../Components/Card";
-import { fetchAllStudent, get_all_students } from "../Features/StudentSlice";
+import React from "react";
+import Card from "../components/Card";
+import { useCreateUserMutation, useGetUserQuery } from "../services/postApi";
 
 const Home = () => {
-    const students = useSelector(get_all_students);
-    const isLoading = useSelector((state) => state.StudentReducer.isLoading);
+    const { data, isLoading } = useGetUserQuery();
+    // console.log(data)
 
-    const dispatch = useDispatch();
+    const res = useCreateUserMutation();
+    console.log(res);
+
+    if (isLoading) {
+        return <h2 className="text-indigo-700 text-lg">Loading .... </h2>;
+    }
 
     return (
-        <div className="container px-5 py-10 mx-auto ">
-            <h1 className="text-3xl text-center">Crud ReduxToolkit </h1>
-            <div className="mx-auto w-11/12 my-10">
-                <div className="flex flex-wrap justify-center md:justify-start gap-9 ">
-                    {isLoading ? (
-                        <h1 className="bg-blue-500">Loading .... </h1>
-                    ) : (
-                        students.length > 0 &&
-                        students.map((std) => {
-                            return <Card data={std} key={std.id} />;
-                        })
-                    )}
-                </div>
+        <div className="container mx-auto p-6 shadow rounded">
+            <h1 className="text-blue-700 text-4xl">RTK Query .. </h1>
+            <button className=" bg-red-700 hover:bg-red-800 rounded text-sm mt-3 px-3 py-2 text-white w-full">
+                Create Dummy Student
+            </button>
+            <div className="flex flex-wrap justify-between gap-6">
+                {data?.map((data) => {
+                    return <Card data={data} key={data.id} />;
+                })}
             </div>
         </div>
     );

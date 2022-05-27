@@ -4,13 +4,8 @@
 
 
 
-*{
-  margin:0;
-  padding:0;
-}
-
-@layer base {
-  body{
-    font-family: 'poppins';
+@layer base{
+  html{
+    font-family:'poppins'
   }
 }
